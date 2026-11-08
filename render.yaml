@@ -1,5 +1,5 @@
 # Render "Blueprint": the online demo of the dashboard (free plan).
-# Render builds dashboard/Dockerfile and runs it with DEMO_MODE=1, so the app
+# Render builds the root Dockerfile (DEMO_MODE=1), so the app
 # answers from dashboard/data/snapshot.json (a copy of a real pipeline run)
 # and needs no database. See docs/DEPLOIEMENT.md.
 services:
@@ -7,7 +7,7 @@ services:
     name: smart-city-mobility
     runtime: docker
     plan: free
-    dockerfilePath: ./dashboard/Dockerfile
+    dockerfilePath: ./Dockerfile
     dockerContext: .
     healthCheckPath: /healthz
     autoDeploy: true

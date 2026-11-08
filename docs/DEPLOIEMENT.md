@@ -49,15 +49,16 @@ python scripts/export_snapshot.py
 2. Cliquez sur **New** → **Blueprint**.
 3. Choisissez le dépôt `smart-city-mobility-data-platform`. Render lit le fichier `render.yaml` à la racine :
    - type : service web, plan **Free**
-   - image : `dashboard/Dockerfile` (construite depuis la racine du dépôt)
+   - image : le `Dockerfile` à la racine du dépôt
    - variable d'environnement : `DEMO_MODE=1`
    - contrôle de santé : `/healthz`
 4. Cliquez sur **Apply**. La première construction prend 3 à 5 minutes.
 5. Votre tableau de bord est en ligne sur une adresse du type `https://smart-city-mobility.onrender.com`.
 
-**Sans Blueprint :** New → Web Service → choisissez le dépôt → Runtime **Docker** →
-Dockerfile path `./dashboard/Dockerfile`, Docker build context `.` → Instance type **Free** →
-ajoutez la variable `DEMO_MODE` = `1` → Create Web Service.
+**Sans Blueprint (le plus simple) :** New → Web Service → choisissez le dépôt → Language **Docker** →
+gardez les valeurs par défaut (Dockerfile path `./Dockerfile`, Docker build context `.`) → Instance type **Free** →
+Create Web Service. Le `Dockerfile` à la racine du dépôt lance déjà le tableau de bord en mode démo.
+Ne mettez **pas** `render.yaml` comme Dockerfile path : ce n'est pas un Dockerfile.
 
 ## Étape 4 : Ajouter le lien dans le README
 

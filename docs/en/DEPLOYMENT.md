@@ -49,15 +49,16 @@ python scripts/export_snapshot.py
 2. Click **New** → **Blueprint**.
 3. Pick the `smart-city-mobility-data-platform` repository. Render reads `render.yaml` at the root:
    - type: web service, **Free** plan
-   - image: `dashboard/Dockerfile` (built from the repository root)
+   - image: the `Dockerfile` at the repository root
    - environment variable: `DEMO_MODE=1`
    - health check: `/healthz`
 4. Click **Apply**. The first build takes 3 to 5 minutes.
 5. Your dashboard is online at an address like `https://smart-city-mobility.onrender.com`.
 
-**Without a Blueprint:** New → Web Service → pick the repository → Runtime **Docker** →
-Dockerfile path `./dashboard/Dockerfile`, Docker build context `.` → Instance type **Free** →
-add the variable `DEMO_MODE` = `1` → Create Web Service.
+**Without a Blueprint (simplest):** New → Web Service → pick the repository → Language **Docker** →
+keep the defaults (Dockerfile path `./Dockerfile`, Docker build context `.`) → Instance type **Free** →
+Create Web Service. The `Dockerfile` at the repository root already runs the dashboard in demo mode.
+Do **not** set `render.yaml` as the Dockerfile path: it is not a Dockerfile.
 
 ## Step 4: Add the link to the README
 
