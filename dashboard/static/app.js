@@ -553,6 +553,10 @@ async function init() {
   Cursor.init();
   Scroll.init();
 
+  // a link can choose the period, e.g. /?hours=24#traffic
+  const linkHours = Number(new URLSearchParams(location.search).get("hours"));
+  if ([1, 6, 24].includes(linkHours)) state.hours = linkHours;
+  document.querySelectorAll("#range button").forEach((b) => b.classList.toggle("active", Number(b.dataset.hours) === state.hours));
   document.querySelectorAll("#lang button").forEach((b) => b.classList.toggle("active", b.dataset.lang === LANG));
   document.querySelectorAll("#range button").forEach((b) => b.addEventListener("click", () => {
     document.querySelectorAll("#range button").forEach((x) => x.classList.toggle("active", x === b));

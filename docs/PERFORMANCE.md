@@ -44,7 +44,7 @@ Les quatre requêtes Spark tournent pendant le benchmark : chaque relevé est do
 (100 % = un cœur. Les détails par benchmark sont dans les fichiers JSON.)
 
 **En charge normale** (60 capteurs, un relevé toutes les 10 s, environ 6,5 événements/s avec les bus et le tram),
-la latence de Kafka à PostGIS est d'environ **__NL_P50__ s (médiane)** et __NL_P95__ s (p95).
+la latence de Kafka à PostGIS est d'environ **4,3 s (médiane)** et 22 s (p95).
 
 **Historique de 24 h au démarrage :** les 505 000 événements simulés au premier démarrage sont traités par Spark
 en 8 à 10 minutes, en même temps que les données en direct.

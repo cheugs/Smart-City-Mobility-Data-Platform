@@ -184,7 +184,7 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { display: block; }
 .error-banner { border-color: rgba(226, 85, 58, 0.7); background: rgba(226, 85, 58, 0.18); }
 
 /* ------------------------------------------------------------------ hero */
-.hero { min-height: 74vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 90px 0 26px; position: relative; }
+.hero { min-height: min(74vh, 680px); display: flex; flex-direction: column; justify-content: flex-end; padding: 90px 0 26px; position: relative; }
 .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 18px; }
 .eyebrow .tag { background: rgba(0, 0, 0, 0.2); border: 1px solid var(--line); padding: 3px 7px; border-radius: 3px; }
 .display {

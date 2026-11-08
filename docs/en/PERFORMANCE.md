@@ -44,7 +44,7 @@ through the whole real pipeline (validation, deduplication, watermark, upserts).
 (100 % = one core. Per-benchmark details are in the JSON files.)
 
 **Under normal load** (60 sensors, one reading every 10 s, about 6.5 events/s with buses and trams),
-the latency from Kafka to PostGIS is about **__NL_P50__ s (median)** and __NL_P95__ s (p95).
+the latency from Kafka to PostGIS is about **4.3 s (median)** and 22 s (p95).
 
 **24-hour history at start-up:** the 505,000 events simulated on the first start are processed by Spark
 in 8 to 10 minutes, alongside the live data.

@@ -53,7 +53,7 @@ python scripts/export_snapshot.py
    - environment variable: `DEMO_MODE=1`
    - health check: `/healthz`
 4. Click **Apply**. The first build takes 3 to 5 minutes.
-5. Your dashboard is online at an address like `https://smart-city-mobility.onrender.com`.
+5. Your dashboard is online at an address like `https://smart-city-mobility-data-platform-1.onrender.com`.
 
 **Without a Blueprint (simplest):** New → Web Service → pick the repository → Language **Docker** →
 keep the defaults (Dockerfile path `./Dockerfile`, Docker build context `.`) → Instance type **Free** →

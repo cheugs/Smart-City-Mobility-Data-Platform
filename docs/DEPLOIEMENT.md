@@ -53,7 +53,7 @@ python scripts/export_snapshot.py
    - variable d'environnement : `DEMO_MODE=1`
    - contrôle de santé : `/healthz`
 4. Cliquez sur **Apply**. La première construction prend 3 à 5 minutes.
-5. Votre tableau de bord est en ligne sur une adresse du type `https://smart-city-mobility.onrender.com`.
+5. Votre tableau de bord est en ligne sur une adresse du type `https://smart-city-mobility-data-platform-1.onrender.com`.
 
 **Sans Blueprint (le plus simple) :** New → Web Service → choisissez le dépôt → Language **Docker** →
 gardez les valeurs par défaut (Dockerfile path `./Dockerfile`, Docker build context `.`) → Instance type **Free** →
