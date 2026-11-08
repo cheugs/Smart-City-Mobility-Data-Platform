@@ -1,0 +1,9 @@
+# For running the tests and the benchmark from your laptop:
+#   pip install -r requirements-dev.txt
+pytest==8.3.3
+pyspark==3.5.3
+confluent-kafka==2.6.1
+psycopg2-binary==2.9.10
+fastapi==0.115.6
+uvicorn==0.32.1
+httpx==0.28.1
