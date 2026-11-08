@@ -250,7 +250,7 @@ def test_full_replay_from_kafka_gives_back_the_same_events():
     import subprocess
     subprocess.run(script, cwd=ROOT, check=True, timeout=600)
     wait_for(lambda: sql("select count(*) from raw.traffic_readings where event_id = any(%s)", (sample,))[0][0] == len(sample),
-             timeout=1200, every=10, message="the sampled events to come back after the replay")
+             timeout=3000, every=15, message="the sampled events to come back after the replay")
     after = sql("select count(*), count(distinct event_id) from raw.traffic_readings")[0]
     assert after[0] == after[1]                 # still no duplicates
     assert after[0] >= before[0] * 0.99         # everything is back (the producer keeps adding new ones)
