@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mobilité urbaine · Smart City</title>
+  <meta name="description" content="Vue opérationnelle du trafic routier et des transports publics d'une ville exemple, alimentée par un pipeline Kafka, Spark, PostGIS et Airflow.">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+  <!-- Loading screen (like the reference: a small mono pill) -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-pill"><span>.</span><span data-i18n="loading">CHARGEMENT</span> <b id="loader-count">00</b></div>
+  </div>
+
+  <!-- Custom cursor (hidden on touch screens) -->
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursor-ring" aria-hidden="true"><span id="cursor-label"></span></div>
+
+  <!-- Page transition panel -->
+  <div class="wipe" id="wipe" aria-hidden="true"><span class="wipe-title" id="wipe-title"></span></div>
+
+  <!-- Mobile top bar -->
+  <header class="mobile-bar">
+    <button class="icon-btn" id="menu-open" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M3 8h18M3 16h18"/></svg></button>
+    <span class="brand-mini">MOBILITÉ</span>
+    <span class="health-dot" id="health-dot-mobile"></span>
+  </header>
+
+  <!-- ============================================================ SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <button class="icon-btn close-btn" id="menu-close" aria-label="Fermer"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+      <a class="brand" href="#overview" data-page="overview">
+        <span class="brand-name">MOBILITÉ</span>
+        <span class="brand-sub">.SMART CITY DATA PLATFORM</span>
+      </a>
+    </div>
+
+    <nav class="nav" aria-label="Pages">
+      <a href="#overview" data-page="overview"><span class="num">.01</span><span class="label" data-i18n="nav_overview">Vue d'ensemble</span><svg class="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#traffic" data-page="traffic"><span class="num">.02</span><span class="label" data-i18n="nav_traffic">Trafic routier</span><svg class="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#map" data-page="map"><span class="num">.03</span><span class="label" data-i18n="nav_map">Carte de la ville</span><svg class="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#transit" data-page="transit"><span class="num">.04</span><span class="label" data-i18n="nav_transit">Bus &amp; tram</span><svg class="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#pipeline" data-page="pipeline"><span class="num">.05</span><span class="label" data-i18n="nav_pipeline">Pipeline</span><svg class="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#quality" data-page="quality"><span class="num">.06</span><span class="label" data-i18n="nav_quality">Qualité des données</span><svg class="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </nav>
+
+    <div class="sidebar-controls">
+      <div class="control">
+        <span class="control-label" data-i18n="period">Période</span>
+        <div class="segmented" id="range">
+          <button data-hours="1" class="active">1H</button>
+          <button data-hours="6">6H</button>
+          <button data-hours="24">24H</button>
+        </div>
+      </div>
+      <div class="control">
+        <span class="control-label" data-i18n="language">Langue</span>
+        <div class="segmented" id="lang">
+          <button data-lang="fr" class="active">FR</button>
+          <button data-lang="en">EN</button>
+        </div>
+      </div>
+      <div class="status-card">
+        <div class="status-row"><span class="health-dot" id="health-dot"></span><span id="health-text">—</span></div>
+        <div class="status-row small" id="mode-text">—</div>
+      </div>
+    </div>
+
+    <div class="sidebar-foot">
+      <span>Chengho Fongang Marie Louise</span>
+      <a href="https://github.com/cheugs" target="_blank" rel="noopener" data-cursor="GitHub">GitHub <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+    </div>
+  </aside>
+
+  <!-- ============================================================ MAIN -->
+  <main class="main" id="main">
+    <div class="grid-lines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="demo-banner" id="demo-banner" hidden></div>
+    <div class="error-banner" id="error-banner" hidden></div>
+    <div id="view"></div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="/static/i18n.js"></script>
+  <script src="/static/effects.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

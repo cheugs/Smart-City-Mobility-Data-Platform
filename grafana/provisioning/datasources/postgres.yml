@@ -1,0 +1,17 @@
+# Grafana reads the mobility database directly. The values come from the
+# environment of the grafana container (docker-compose.yml -> .env).
+apiVersion: 1
+datasources:
+  - name: PostGIS
+    uid: postgis
+    type: grafana-postgresql-datasource
+    url: ${PG_HOST}:${PG_PORT}
+    user: ${PG_USER}
+    isDefault: true
+    jsonData:
+      database: ${PG_DB}
+      sslmode: disable
+      postgresVersion: 1600
+      timescaledb: false
+    secureJsonData:
+      password: ${PG_PASSWORD}
