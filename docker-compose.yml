@@ -1,0 +1,236 @@
+# Smart City Mobility Data Platform
+#   1) cp .env.example .env      (set your own passwords)
+#   2) docker compose up -d --build
+#
+#   producer ──▶ kafka ──▶ spark (structured streaming) ──▶ postgis ◀── airflow (marts + checks)
+#                                                            │
+#                                          dashboard (FastAPI) + grafana (monitoring)
+#
+# All settings and passwords come from the .env file (never committed).
+
+x-postgres-env: &postgres-env
+  PG_HOST: postgres
+  PG_PORT: "5432"
+  PG_DB: ${POSTGRES_DB:?set POSTGRES_DB in .env}
+  PG_USER: ${POSTGRES_USER:?set POSTGRES_USER in .env}
+  PG_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+
+name: smart-city-mobility
+
+services:
+
+  # ---------------------------------------------------------------- Kafka
+  # Single Kafka broker in KRaft mode (no Zookeeper needed).
+  kafka:
+    image: apache/kafka:3.8.0
+    container_name: mobility-kafka
+    ports:
+      - "29093:29093"   # so you can connect from your laptop on localhost:29093
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:29093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,EXTERNAL://localhost:29093
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      # Topics are created explicitly by kafka-init (below), not by accident.
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+    volumes:
+      - kafka_data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    restart: unless-stopped
+
+  # One-shot job that creates the two topics with a known configuration.
+  #   3 partitions    -> up to 3 parallel consumers; key = sensor_id / line_id keeps
+  #                      each sensor's (or line's) events in order on one partition
+  #   7-day retention -> events can be replayed for a week
+  kafka-init:
+    image: apache/kafka:3.8.0
+    depends_on:
+      kafka:
+        condition: service_healthy
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - >
+        /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --create --if-not-exists
+        --topic traffic.readings --partitions 3 --replication-factor 1 --config retention.ms=604800000 &&
+        /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --create --if-not-exists
+        --topic transit.events --partitions 3 --replication-factor 1 --config retention.ms=604800000 &&
+        /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --describe
+    restart: "no"
+
+  # ---------------------------------------------------------------- PostGIS
+  # PostgreSQL 16 + PostGIS. The sql/ scripts run on the very first start:
+  # Airflow database, schemas and tables, then the sample-city reference data.
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: mobility-postgres
+    ports:
+      - "5433:5432"     # 5433 on your laptop (5432 is often already used)
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h localhost -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 120s   # the very first start creates PostGIS and loads the city: it takes a while
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------- Producer
+  # Simulates 60 traffic sensors and 5 bus/tram lines (with duplicates, late
+  # events, invalid records, sensor outages and two schema versions).
+  producer:
+    build:
+      context: .
+      dockerfile: producer/Dockerfile
+    container_name: mobility-producer
+    depends_on:
+      kafka-init:
+        condition: service_completed_successfully
+    environment:
+      <<: *postgres-env           # only used by benchmark_load.py
+      KAFKA_BOOTSTRAP: kafka:9092
+      BACKFILL_HOURS: ${BACKFILL_HOURS:-24}   # first start only: hours of history sent before live data
+    volumes:
+      - ./benchmarks:/results     # benchmark results are written here
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------- Spark
+  # PySpark Structured Streaming job: Kafka -> PostGIS (4 streaming queries).
+  # restart: if the job crashes it restarts and resumes from its checkpoints.
+  spark:
+    build: ./spark
+    container_name: mobility-spark
+    depends_on:
+      kafka-init:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_healthy
+    environment:
+      <<: *postgres-env
+      KAFKA_BOOTSTRAP: kafka:9092
+      CHECKPOINT_DIR: /opt/checkpoints
+      WATERMARK: ${WATERMARK:-10 minutes}
+      TRIGGER_INTERVAL: ${TRIGGER_INTERVAL:-5 seconds}
+      MAX_OFFSETS_PER_TRIGGER: ${MAX_OFFSETS_PER_TRIGGER:-20000}
+      SPARK_MASTER: ${SPARK_MASTER:-local[4]}
+      TZ: UTC
+    ports:
+      - "4041:4040"   # Spark UI on http://localhost:4041
+    volumes:
+      - spark_checkpoints:/opt/checkpoints
+      - spark_ivy:/opt/ivy   # cache of downloaded Kafka connector jars
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------- Airflow
+  # Orchestrates the batch side: geospatial joins, analytics marts, data-quality
+  # checks (every 10 min) and missing-sensor incidents (every 5 min).
+  # LocalExecutor, metadata in the separate "airflow" database.
+  airflow:
+    image: apache/airflow:2.10.3-python3.11
+    container_name: mobility-airflow
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      <<: *postgres-env
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/airflow
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "false"   # DAGs start running as soon as they are found
+      AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL: "30"
+      AIRFLOW__WEBSERVER__WORKERS: "2"            # fewer web workers = less memory
+      AIRFLOW__WEBSERVER__SECRET_KEY: ${AIRFLOW_SECRET_KEY:?set AIRFLOW_SECRET_KEY in .env}
+      AIRFLOW_ADMIN_PASSWORD: ${AIRFLOW_ADMIN_PASSWORD:?set AIRFLOW_ADMIN_PASSWORD in .env}
+      TZ: UTC
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/sql:/opt/airflow/sql:ro
+    ports:
+      - "8080:8080"   # Airflow UI (user: admin)
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - |
+        airflow db migrate &&
+        airflow users create --username admin --password "$$AIRFLOW_ADMIN_PASSWORD" \
+          --firstname Admin --lastname User --role Admin --email admin@example.com || true
+        airflow scheduler &
+        exec airflow webserver
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fs http://localhost:8080/health || exit 1"]
+      interval: 20s
+      timeout: 10s
+      retries: 15
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------- Grafana
+  # Technical monitoring of the pipeline (dashboards provisioned from files).
+  grafana:
+    image: grafana/grafana:11.3.0
+    container_name: mobility-grafana
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      <<: *postgres-env
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?set GRAFANA_ADMIN_PASSWORD in .env}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports:
+      - "3000:3000"   # Grafana UI (user: admin)
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------- Dashboard
+  # Operational view of the city (FastAPI + static web page), live from PostGIS.
+  dashboard:
+    build:
+      context: .
+      dockerfile: dashboard/Dockerfile
+    container_name: mobility-dashboard
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      <<: *postgres-env
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------- Tests
+  # Unit + integration tests (need PySpark, so they run in the Spark image).
+  #   docker compose run --rm tests
+  tests:
+    build: ./spark
+    profiles: ["test"]
+    working_dir: /project
+    environment:
+      PYTHONPATH: /opt/spark/python:/opt/spark/python/lib/py4j-0.10.9.7-src.zip
+      TZ: UTC
+    volumes:
+      - ./:/project
+    entrypoint: ["python3", "-m", "pytest", "-p", "no:cacheprovider"]
+    command: ["tests/unit", "tests/integration", "-v"]
+
+volumes:
+  kafka_data:
+  pg_data:
+  spark_checkpoints:
+  spark_ivy:

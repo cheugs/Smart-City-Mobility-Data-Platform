@@ -1,0 +1,948 @@
+{
+ "sensors": [
+  {
+   "sensor_id": "S001",
+   "lat": 45.831287,
+   "lon": 1.280428,
+   "true_segment_id": "C63-4",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S002",
+   "lat": 45.842329,
+   "lon": 1.277518,
+   "true_segment_id": "R15-6",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S003",
+   "lat": 45.838173,
+   "lon": 1.265403,
+   "true_segment_id": "R23-4",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S004",
+   "lat": 45.83367,
+   "lon": 1.258111,
+   "true_segment_id": "R32-3",
+   "road_class": "arterial",
+   "speed_limit_kmh": 50,
+   "free_flow_vpm": 30
+  },
+  {
+   "sensor_id": "S005",
+   "lat": 45.834219,
+   "lon": 1.264299,
+   "true_segment_id": "R33-4",
+   "road_class": "arterial",
+   "speed_limit_kmh": 50,
+   "free_flow_vpm": 30
+  },
+  {
+   "sensor_id": "S006",
+   "lat": 45.844161,
+   "lon": 1.242015,
+   "true_segment_id": "C00-1",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S007",
+   "lat": 45.823025,
+   "lon": 1.241989,
+   "true_segment_id": "C05-6",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S008",
+   "lat": 45.833573,
+   "lon": 1.272386,
+   "true_segment_id": "R34-5",
+   "road_class": "arterial",
+   "speed_limit_kmh": 50,
+   "free_flow_vpm": 30
+  },
+  {
+   "sensor_id": "S009",
+   "lat": 45.846995,
+   "lon": 1.244329,
+   "true_segment_id": "R00-1",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S010",
+   "lat": 45.819975,
+   "lon": 1.264131,
+   "true_segment_id": "R63-4",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S011",
+   "lat": 45.820179,
+   "lon": 1.246556,
+   "true_segment_id": "R60-1",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S012",
+   "lat": 45.841443,
+   "lon": 1.248598,
+   "true_segment_id": "C11-2",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S013",
+   "lat": 45.827515,
+   "lon": 1.2804,
+   "true_segment_id": "C64-5",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S014",
+   "lat": 45.840438,
+   "lon": 1.260676,
+   "true_segment_id": "C31-2",
+   "road_class": "arterial",
+   "speed_limit_kmh": 50,
+   "free_flow_vpm": 30
+  },
+  {
+   "sensor_id": "S015",
+   "lat": 45.835097,
+   "lon": 1.24184,
+   "true_segment_id": "C02-3",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S016",
+   "lat": 45.844288,
+   "lon": 1.254497,
+   "true_segment_id": "C20-1",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S017",
+   "lat": 45.844452,
+   "lon": 1.260575,
+   "true_segment_id": "C30-1",
+   "road_class": "arterial",
+   "speed_limit_kmh": 50,
+   "free_flow_vpm": 30
+  },
+  {
+   "sensor_id": "S018",
+   "lat": 45.846974,
+   "lon": 1.262978,
+   "true_segment_id": "R03-4",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S019",
+   "lat": 45.844933,
+   "lon": 1.280409,
+   "true_segment_id": "C60-1",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S020",
+   "lat": 45.821779,
+   "lon": 1.261255,
+   "true_segment_id": "C35-6",
+   "road_class": "arterial",
+   "speed_limit_kmh": 50,
+   "free_flow_vpm": 30
+  },
+  {
+   "sensor_id": "S021",
+   "lat": 45.840963,
+   "lon": 1.273442,
+   "true_segment_id": "C51-2",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S022",
+   "lat": 45.826149,
+   "lon": 1.261238,
+   "true_segment_id": "C34-5",
+   "road_class": "arterial",
+   "speed_limit_kmh": 50,
+   "free_flow_vpm": 30
+  },
+  {
+   "sensor_id": "S023",
+   "lat": 45.824775,
+   "lon": 1.258419,
+   "true_segment_id": "R52-3",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S024",
+   "lat": 45.824421,
+   "lon": 1.262938,
+   "true_segment_id": "R53-4",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S025",
+   "lat": 45.846975,
+   "lon": 1.277185,
+   "true_segment_id": "R05-6",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S026",
+   "lat": 45.834543,
+   "lon": 1.248397,
+   "true_segment_id": "C12-3",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S027",
+   "lat": 45.847167,
+   "lon": 1.25639,
+   "true_segment_id": "R02-3",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S028",
+   "lat": 45.842636,
+   "lon": 1.246342,
+   "true_segment_id": "R10-1",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S029",
+   "lat": 45.833449,
+   "lon": 1.252957,
+   "true_segment_id": "R31-2",
+   "road_class": "arterial",
+   "speed_limit_kmh": 50,
+   "free_flow_vpm": 30
+  },
+  {
+   "sensor_id": "S030",
+   "lat": 45.837919,
+   "lon": 1.278413,
+   "true_segment_id": "R25-6",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S031",
+   "lat": 45.824564,
+   "lon": 1.277958,
+   "true_segment_id": "R55-6",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S032",
+   "lat": 45.847192,
+   "lon": 1.270802,
+   "true_segment_id": "R04-5",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S033",
+   "lat": 45.847212,
+   "lon": 1.252693,
+   "true_segment_id": "R01-2",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S034",
+   "lat": 45.83362,
+   "lon": 1.278112,
+   "true_segment_id": "R35-6",
+   "road_class": "arterial",
+   "speed_limit_kmh": 50,
+   "free_flow_vpm": 30
+  },
+  {
+   "sensor_id": "S035",
+   "lat": 45.838211,
+   "lon": 1.27063,
+   "true_segment_id": "R24-5",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S036",
+   "lat": 45.820009,
+   "lon": 1.270143,
+   "true_segment_id": "R64-5",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S037",
+   "lat": 45.843125,
+   "lon": 1.258345,
+   "true_segment_id": "R12-3",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S038",
+   "lat": 45.840916,
+   "lon": 1.280372,
+   "true_segment_id": "C61-2",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S039",
+   "lat": 45.835907,
+   "lon": 1.254753,
+   "true_segment_id": "C22-3",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S040",
+   "lat": 45.829373,
+   "lon": 1.244961,
+   "true_segment_id": "R40-1",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S041",
+   "lat": 45.823967,
+   "lon": 1.270978,
+   "true_segment_id": "R54-5",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S042",
+   "lat": 45.82003,
+   "lon": 1.277125,
+   "true_segment_id": "R65-6",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S043",
+   "lat": 45.839399,
+   "lon": 1.242021,
+   "true_segment_id": "C01-2",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S044",
+   "lat": 45.833421,
+   "lon": 1.246261,
+   "true_segment_id": "R30-1",
+   "road_class": "arterial",
+   "speed_limit_kmh": 50,
+   "free_flow_vpm": 30
+  },
+  {
+   "sensor_id": "S045",
+   "lat": 45.831746,
+   "lon": 1.274452,
+   "true_segment_id": "C53-4",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S046",
+   "lat": 45.822511,
+   "lon": 1.280233,
+   "true_segment_id": "C65-6",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S047",
+   "lat": 45.826211,
+   "lon": 1.242022,
+   "true_segment_id": "C04-5",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S048",
+   "lat": 45.830527,
+   "lon": 1.248301,
+   "true_segment_id": "C13-4",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S049",
+   "lat": 45.838133,
+   "lon": 1.250037,
+   "true_segment_id": "R21-2",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S050",
+   "lat": 45.837795,
+   "lon": 1.25645,
+   "true_segment_id": "R22-3",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S051",
+   "lat": 45.820163,
+   "lon": 1.259132,
+   "true_segment_id": "R62-3",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S052",
+   "lat": 45.820015,
+   "lon": 1.250417,
+   "true_segment_id": "R61-2",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S053",
+   "lat": 45.84501,
+   "lon": 1.27361,
+   "true_segment_id": "C50-1",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S054",
+   "lat": 45.829246,
+   "lon": 1.263068,
+   "true_segment_id": "R43-4",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S055",
+   "lat": 45.842826,
+   "lon": 1.251894,
+   "true_segment_id": "R11-2",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S056",
+   "lat": 45.83611,
+   "lon": 1.280209,
+   "true_segment_id": "C62-3",
+   "road_class": "boulevard",
+   "speed_limit_kmh": 70,
+   "free_flow_vpm": 40
+  },
+  {
+   "sensor_id": "S057",
+   "lat": 45.82731,
+   "lon": 1.254473,
+   "true_segment_id": "C24-5",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S058",
+   "lat": 45.829381,
+   "lon": 1.259435,
+   "true_segment_id": "R42-3",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  },
+  {
+   "sensor_id": "S059",
+   "lat": 45.836112,
+   "lon": 1.260855,
+   "true_segment_id": "C32-3",
+   "road_class": "arterial",
+   "speed_limit_kmh": 50,
+   "free_flow_vpm": 30
+  },
+  {
+   "sensor_id": "S060",
+   "lat": 45.843143,
+   "lon": 1.26306,
+   "true_segment_id": "R13-4",
+   "road_class": "local",
+   "speed_limit_kmh": 30,
+   "free_flow_vpm": 12
+  }
+ ],
+ "lines": [
+  {
+   "line_id": "T1",
+   "name": "Tram T1",
+   "mode": "tram",
+   "headway_min": 8,
+   "color": "#1B4D3E",
+   "speed_kmh": 20,
+   "stops": [
+    "T1-01",
+    "T1-02",
+    "T1-03",
+    "T1-04",
+    "T1-05",
+    "T1-06",
+    "T1-07"
+   ]
+  },
+  {
+   "line_id": "L1",
+   "name": "Bus L1",
+   "mode": "bus",
+   "headway_min": 10,
+   "color": "#B5562E",
+   "speed_kmh": 16,
+   "stops": [
+    "L1-01",
+    "L1-02",
+    "L1-03",
+    "L1-04",
+    "L1-05",
+    "L1-06",
+    "L1-07"
+   ]
+  },
+  {
+   "line_id": "L2",
+   "name": "Bus L2",
+   "mode": "bus",
+   "headway_min": 12,
+   "color": "#2F3A44",
+   "speed_kmh": 16,
+   "stops": [
+    "L2-01",
+    "L2-02",
+    "L2-03",
+    "L2-04",
+    "L2-05",
+    "L2-06",
+    "L2-07"
+   ]
+  },
+  {
+   "line_id": "L3",
+   "name": "Bus L3",
+   "mode": "bus",
+   "headway_min": 15,
+   "color": "#7A6A3A",
+   "speed_kmh": 15,
+   "stops": [
+    "L3-01",
+    "L3-02",
+    "L3-03",
+    "L3-04",
+    "L3-05",
+    "L3-06",
+    "L3-07"
+   ]
+  },
+  {
+   "line_id": "L4",
+   "name": "Bus L4",
+   "mode": "bus",
+   "headway_min": 15,
+   "color": "#5B4B6B",
+   "speed_kmh": 18,
+   "stops": [
+    "L4-01",
+    "L4-02",
+    "L4-03",
+    "L4-04",
+    "L4-05",
+    "L4-06",
+    "L4-07"
+   ]
+  }
+ ],
+ "stops": [
+  {
+   "stop_id": "T1-01",
+   "line_id": "T1",
+   "stop_sequence": 1,
+   "name": "Bd de l'Ouest",
+   "lat": 45.833705,
+   "lon": 1.241953,
+   "minutes_to_next": 2.0
+  },
+  {
+   "stop_id": "T1-02",
+   "line_id": "T1",
+   "stop_sequence": 2,
+   "name": "Rue des Écoles",
+   "lat": 45.833376,
+   "lon": 1.248376,
+   "minutes_to_next": 2.1
+  },
+  {
+   "stop_id": "T1-03",
+   "line_id": "T1",
+   "stop_sequence": 3,
+   "name": "Rue Victor Hugo",
+   "lat": 45.833646,
+   "lon": 1.255229,
+   "minutes_to_next": 1.8
+  },
+  {
+   "stop_id": "T1-04",
+   "line_id": "T1",
+   "stop_sequence": 4,
+   "name": "Av. Centrale",
+   "lat": 45.833919,
+   "lon": 1.260751,
+   "minutes_to_next": 2.0
+  },
+  {
+   "stop_id": "T1-05",
+   "line_id": "T1",
+   "stop_sequence": 5,
+   "name": "Rue de la Gare",
+   "lat": 45.834206,
+   "lon": 1.267055,
+   "minutes_to_next": 2.2
+  },
+  {
+   "stop_id": "T1-06",
+   "line_id": "T1",
+   "stop_sequence": 6,
+   "name": "Rue des Arts",
+   "lat": 45.83339,
+   "lon": 1.274379,
+   "minutes_to_next": 1.8
+  },
+  {
+   "stop_id": "T1-07",
+   "line_id": "T1",
+   "stop_sequence": 7,
+   "name": "Bd de l'Est",
+   "lat": 45.833531,
+   "lon": 1.280155,
+   "minutes_to_next": null
+  },
+  {
+   "stop_id": "L1-01",
+   "line_id": "L1",
+   "stop_sequence": 1,
+   "name": "Bd du Nord",
+   "lat": 45.846977,
+   "lon": 1.261028,
+   "minutes_to_next": 2.0
+  },
+  {
+   "stop_id": "L1-02",
+   "line_id": "L1",
+   "stop_sequence": 2,
+   "name": "Rue des Tilleuls",
+   "lat": 45.843299,
+   "lon": 1.260382,
+   "minutes_to_next": 3.0
+  },
+  {
+   "stop_id": "L1-03",
+   "line_id": "L1",
+   "stop_sequence": 3,
+   "name": "Av. de la Liberté",
+   "lat": 45.837412,
+   "lon": 1.260575,
+   "minutes_to_next": 2.0
+  },
+  {
+   "stop_id": "L1-04",
+   "line_id": "L1",
+   "stop_sequence": 4,
+   "name": "Cours de la République",
+   "lat": 45.833774,
+   "lon": 1.260951,
+   "minutes_to_next": 2.4
+  },
+  {
+   "stop_id": "L1-05",
+   "line_id": "L1",
+   "stop_sequence": 5,
+   "name": "Rue du Pont-Neuf",
+   "lat": 45.829348,
+   "lon": 1.261357,
+   "minutes_to_next": 2.5
+  },
+  {
+   "stop_id": "L1-06",
+   "line_id": "L1",
+   "stop_sequence": 6,
+   "name": "Av. des Platanes",
+   "lat": 45.824477,
+   "lon": 1.261199,
+   "minutes_to_next": 2.3
+  },
+  {
+   "stop_id": "L1-07",
+   "line_id": "L1",
+   "stop_sequence": 7,
+   "name": "Bd du Sud",
+   "lat": 45.820163,
+   "lon": 1.261231,
+   "minutes_to_next": null
+  },
+  {
+   "stop_id": "L2-01",
+   "line_id": "L2",
+   "stop_sequence": 1,
+   "name": "Bd de l'Ouest",
+   "lat": 45.842741,
+   "lon": 1.241829,
+   "minutes_to_next": 2.6
+  },
+  {
+   "stop_id": "L2-02",
+   "line_id": "L2",
+   "stop_sequence": 2,
+   "name": "Rue des Écoles",
+   "lat": 45.842682,
+   "lon": 1.249057,
+   "minutes_to_next": 2.1
+  },
+  {
+   "stop_id": "L2-03",
+   "line_id": "L2",
+   "stop_sequence": 3,
+   "name": "Rue Victor Hugo",
+   "lat": 45.842747,
+   "lon": 1.254564,
+   "minutes_to_next": 2.2
+  },
+  {
+   "stop_id": "L2-04",
+   "line_id": "L2",
+   "stop_sequence": 4,
+   "name": "Av. Centrale",
+   "lat": 45.843179,
+   "lon": 1.260449,
+   "minutes_to_next": 2.4
+  },
+  {
+   "stop_id": "L2-05",
+   "line_id": "L2",
+   "stop_sequence": 5,
+   "name": "Rue de la Gare",
+   "lat": 45.843154,
+   "lon": 1.267136,
+   "minutes_to_next": 2.4
+  },
+  {
+   "stop_id": "L2-06",
+   "line_id": "L2",
+   "stop_sequence": 6,
+   "name": "Rue des Arts",
+   "lat": 45.842193,
+   "lon": 1.273513,
+   "minutes_to_next": 2.4
+  },
+  {
+   "stop_id": "L2-07",
+   "line_id": "L2",
+   "stop_sequence": 7,
+   "name": "Bd de l'Est",
+   "lat": 45.842461,
+   "lon": 1.280156,
+   "minutes_to_next": null
+  },
+  {
+   "stop_id": "L3-01",
+   "line_id": "L3",
+   "stop_sequence": 1,
+   "name": "Bd du Nord",
+   "lat": 45.847102,
+   "lon": 1.274043,
+   "minutes_to_next": 2.7
+  },
+  {
+   "stop_id": "L3-02",
+   "line_id": "L3",
+   "stop_sequence": 2,
+   "name": "Rue des Tilleuls",
+   "lat": 45.842106,
+   "lon": 1.273289,
+   "minutes_to_next": 2.4
+  },
+  {
+   "stop_id": "L3-03",
+   "line_id": "L3",
+   "stop_sequence": 3,
+   "name": "Av. de la Liberté",
+   "lat": 45.837824,
+   "lon": 1.274067,
+   "minutes_to_next": 2.4
+  },
+  {
+   "stop_id": "L3-04",
+   "line_id": "L3",
+   "stop_sequence": 4,
+   "name": "Cours de la République",
+   "lat": 45.83353,
+   "lon": 1.274307,
+   "minutes_to_next": 2.3
+  },
+  {
+   "stop_id": "L3-05",
+   "line_id": "L3",
+   "stop_sequence": 5,
+   "name": "Rue du Pont-Neuf",
+   "lat": 45.82959,
+   "lon": 1.27464,
+   "minutes_to_next": 2.9
+  },
+  {
+   "stop_id": "L3-06",
+   "line_id": "L3",
+   "stop_sequence": 6,
+   "name": "Av. des Platanes",
+   "lat": 45.824276,
+   "lon": 1.273306,
+   "minutes_to_next": 2.4
+  },
+  {
+   "stop_id": "L3-07",
+   "line_id": "L3",
+   "stop_sequence": 7,
+   "name": "Bd du Sud",
+   "lat": 45.820015,
+   "lon": 1.273819,
+   "minutes_to_next": null
+  },
+  {
+   "stop_id": "L4-01",
+   "line_id": "L4",
+   "stop_sequence": 1,
+   "name": "Bd de l'Ouest",
+   "lat": 45.82001,
+   "lon": 1.242015,
+   "minutes_to_next": 2.1
+  },
+  {
+   "stop_id": "L4-02",
+   "line_id": "L4",
+   "stop_sequence": 2,
+   "name": "Rue des Écoles",
+   "lat": 45.820169,
+   "lon": 1.248192,
+   "minutes_to_next": 2.2
+  },
+  {
+   "stop_id": "L4-03",
+   "line_id": "L4",
+   "stop_sequence": 3,
+   "name": "Rue Victor Hugo",
+   "lat": 45.820247,
+   "lon": 1.254845,
+   "minutes_to_next": 2.1
+  },
+  {
+   "stop_id": "L4-04",
+   "line_id": "L4",
+   "stop_sequence": 4,
+   "name": "Av. Centrale",
+   "lat": 45.820201,
+   "lon": 1.260954,
+   "minutes_to_next": 2.2
+  },
+  {
+   "stop_id": "L4-05",
+   "line_id": "L4",
+   "stop_sequence": 5,
+   "name": "Rue de la Gare",
+   "lat": 45.820138,
+   "lon": 1.267614,
+   "minutes_to_next": 2.1
+  },
+  {
+   "stop_id": "L4-06",
+   "line_id": "L4",
+   "stop_sequence": 6,
+   "name": "Rue des Arts",
+   "lat": 45.820079,
+   "lon": 1.273767,
+   "minutes_to_next": 2.2
+  },
+  {
+   "stop_id": "L4-07",
+   "line_id": "L4",
+   "stop_sequence": 7,
+   "name": "Bd de l'Est",
+   "lat": 45.82015,
+   "lon": 1.280264,
+   "minutes_to_next": null
+  }
+ ]
+}

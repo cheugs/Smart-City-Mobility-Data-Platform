@@ -1,0 +1,30 @@
+# Secrets: never commit the real .env (only .env.example)
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Spark files that local runs can create
+spark-warehouse/
+metastore_db/
+derby.log
+checkpoints/
+
+# Airflow files created when DAGs are parsed locally
+airflow/logs/
+
+# Logs
+*.log
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local editor / assistant settings
+.claude/
